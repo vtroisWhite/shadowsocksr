@@ -511,10 +511,10 @@ class Dbv3Transfer(DbTransfer):
                 cur = conn.cursor()
                 try:
                     if id in self.port_uid_table:
-                        cur.execute("INSERT INTO `user_traffic_log` (`id`, `user_id`, `u`, `d`, `node_id`, `rate`, `traffic`, `log_time`) VALUES (NULL, '" + \
+                        cur.execute("INSERT INTO `user_traffic_log` (`id`, `user_id`, `u`, `d`, `node_id`, `rate`, `traffic`, `log_time`, `createTime`) VALUES (NULL, '" + \
                             str(self.port_uid_table[id]) + "', '" + str(transfer[0]) + "', '" + str(transfer[1]) + "', '" + \
                             str(self.cfg["node_id"]) + "', '" + str(self.cfg["transfer_mul"]) + "', '" + \
-                            self.traffic_format((transfer[0] + transfer[1]) * int(self.cfg["transfer_mul"])) + "', unix_timestamp()); ")
+                            self.traffic_format((transfer[0] + transfer[1]) * int(self.cfg["transfer_mul"])) + "', unix_timestamp(), sysdate()); ")
                 except:
                     logging.warn('no `user_traffic_log` in db')
                 cur.close()
